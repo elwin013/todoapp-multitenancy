@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="multi tenant schema - generate jooq " type="Application" factoryName="Application" folderName="multi - schema">
+    <option name="MAIN_CLASS_NAME" value="tools.JooqGenerateFromTestcontainers" />
+    <module name="multitenancy-apps" />
+    <option name="PROGRAM_PARAMETERS" value="&quot;net.codeer.app.multiSchemaLevel.jooq&quot; &quot;migration/schemaLevel&quot;" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

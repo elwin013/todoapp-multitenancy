@@ -1,0 +1,17 @@
+{
+  "createIndexes": "todos",
+  "indexes": [
+    {
+      "name": "idx_todo_created",
+      "key": { "created": -1 }
+    },
+    {
+      "name": "idx_todo_created_by",
+      "key": { "created_by": 1 }
+    },
+    {
+      "name": "idx_todo_tenant_id",
+      "key": { "tenant_id": 1 }
+    }
+  ]
+}

@@ -15,7 +15,6 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class MongoDatabaseProvider {
     private static MongoClient mongoClient;
-    private static MongoDatabase mongoDatabase;
 
     /**
      * Required to correctly map the POJOs from-to Mongo.
@@ -25,17 +24,16 @@ public class MongoDatabaseProvider {
             fromProviders(PojoCodecProvider.builder().automatic(true).build())
     );
 
-    public static void init(String connectionString, String dbName) {
+    public static void init(String connectionString) {
         mongoClient = MongoClients.create(connectionString);
-        mongoDatabase = mongoClient.getDatabase(dbName).withCodecRegistry(pojoCodecRegistry);
     }
 
-    public static MongoDatabase getDatabase() {
-        return mongoDatabase;
+    public static MongoDatabase getDatabase(String dbName) {
+        return mongoClient.getDatabase(dbName).withCodecRegistry(pojoCodecRegistry);
     }
 
 
     public static void close() throws IOException {
-        mongoClient.close();
+        if (mongoClient != null) {mongoClient.close();}
     }
 }

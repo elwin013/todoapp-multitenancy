@@ -1,17 +1,11 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="single tenant - mongo" type="Application" factoryName="Application">
+  <configuration default="false" name="single tenant - mongo" type="Application" factoryName="Application" folderName="single tenant">
     <envs>
       <env name="MONGO_CONNECTION_STRING" value="mongodb://todoapp:pass@localhost:28017/?authSource=admin" />
     </envs>
-    <option name="MAIN_CLASS_NAME" value="net.codeer.app.single.App" />
+    <option name="MAIN_CLASS_NAME" value="net.codeer.app.single.AppSingle" />
     <module name="multitenancy-apps" />
     <option name="PROGRAM_PARAMETERS" value="mongo" />
-    <extension name="coverage">
-      <pattern>
-        <option name="PATTERN" value="net.codeer.app.single.*" />
-        <option name="ENABLED" value="true" />
-      </pattern>
-    </extension>
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

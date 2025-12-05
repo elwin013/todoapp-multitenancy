@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="single tenant - psql" type="Application" factoryName="Application" folderName="single tenant">
+    <envs>
+      <env name="ADMIN_PSQL_CONNECTION_STRING" value="jdbc:postgresql://localhost:5543/postgres?user=todoapp&amp;password=pass" />
+      <env name="PSQL_CONNECTION_STRING" value="jdbc:postgresql://localhost:5543/todoapp_single?user=todoapp&amp;password=pass" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="net.codeer.app.single.AppSingle" />
+    <module name="multitenancy-apps" />
+    <option name="PROGRAM_PARAMETERS" value="psql" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

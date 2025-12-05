@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="single tenant - generate jooq" type="Application" factoryName="Application" folderName="single tenant">
+    <option name="MAIN_CLASS_NAME" value="tools.JooqGenerateFromTestcontainers" />
+    <module name="multitenancy-apps" />
+    <option name="PROGRAM_PARAMETERS" value="&quot;net.codeer.app.single.jooq&quot; &quot;migration/single&quot;" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

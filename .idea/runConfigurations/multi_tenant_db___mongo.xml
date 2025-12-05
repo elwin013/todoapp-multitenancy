@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="multi tenant db - mongo" type="Application" factoryName="Application" folderName="multi - database">
+    <envs>
+      <env name="MONGO_CONNECTION_STRING" value="mongodb://todoapp:pass@localhost:28017/?authSource=admin" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="net.codeer.app.multiDbLevel.AppMultiTenantDatabase" />
+    <module name="multitenancy-apps" />
+    <option name="PROGRAM_PARAMETERS" value="mongo" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

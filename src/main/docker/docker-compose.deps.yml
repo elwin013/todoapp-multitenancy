@@ -1,0 +1,19 @@
+services:
+  mongo:
+    image: mongo:8.0
+    container_name: mongodb
+    ports:
+      - "28017:27017"
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+        MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
+
+  postgres:
+    image: postgres:17
+    container_name: postgresdb
+    ports:
+      - "5543:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_USER}
