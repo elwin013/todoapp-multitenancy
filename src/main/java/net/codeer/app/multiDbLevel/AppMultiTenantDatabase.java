@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.function.Function;
 
 public class AppMultiTenantDatabase extends AppBase {
-    private static final Logger LOG = LoggerFactory.getLogger("App");
-
     static void main(String[] args) {
         new AppMultiTenantDatabase().run(args);
     }
