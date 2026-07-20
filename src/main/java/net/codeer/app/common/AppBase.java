@@ -4,7 +4,6 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 import io.javalin.http.staticfiles.Location;
 import io.javalin.rendering.template.JavalinJte;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,16 +30,33 @@ public abstract class AppBase {
             return;
         }
 
+        var todoDaoProvider = getTodoDaoProvider(args);
+
         var app = Javalin.create(config -> {
-            config.showJavalinBanner = false;
-            config.fileRenderer(new JavalinJte());
+            config.startup.showJavalinBanner = false;
+            config.fileRenderer(new JavalinJte(JavalinJte.Companion.directoryTemplateEngine()));
             config.staticFiles.add("/static", Location.CLASSPATH);
+
+            // Auth
+            config.routes.beforeMatched(CustomAccessManager::beforeMatched);
+            new LoginController(new InMemoryLoginDAO(
+                    getInitialUsers()
+            )).registerRoutes(config.routes);
+
+            //
+            new TodoController(todoDaoProvider).registerRoutes(config.routes);
+
+            config.events.serverStopping(() -> {
+                LOG.info("Stopping app {}", getName());
+                onServerStopping();
+            });
         });
 
-        addAuth(app);
+        app.start(7070);
+    }
 
-        Function<Context, TodoDAO> todoDaoProvider = null;
-
+    private Function<Context, TodoDAO> getTodoDaoProvider(String[] args) {
+        Function<Context, TodoDAO> todoDaoProvider;
         switch (args[0]) {
             case "mongo" -> {
                 LOG.info("Using Mongo!");
@@ -54,26 +70,7 @@ public abstract class AppBase {
             }
             default -> throw new IllegalArgumentException("No database selected");
         }
-
-        new TodoController(todoDaoProvider).registerRoutes(app);
-
-        app.events(event -> event.serverStopping(() -> {
-            LOG.info("Stopping app {}", getName());
-            onServerStopping();
-
-        }));
-
-        app.start(7070);
-    }
-
-
-
-    private void addAuth(Javalin app) {
-        app.beforeMatched(CustomAccessManager::beforeMatched);
-
-        new LoginController(new InMemoryLoginDAO(
-                getInitialUsers()
-        )).registerRoutes(app);
+        return todoDaoProvider;
     }
 
     protected List<InMemoryLoginDAO.User> getInitialUsers() {

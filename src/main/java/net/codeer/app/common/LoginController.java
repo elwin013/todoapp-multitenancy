@@ -1,6 +1,8 @@
 package net.codeer.app.common;
 
 import io.javalin.Javalin;
+import io.javalin.config.JavalinConfig;
+import io.javalin.config.RoutesConfig;
 import io.javalin.http.Context;
 
 import java.util.HashMap;
@@ -17,10 +19,10 @@ public class LoginController {
         this.loginDAO = loginDAO;
     }
 
-    public void registerRoutes(Javalin app) {
-        app.get("/login", this::showLogin);
-        app.post("/login", this::doLogin);
-        app.get("/logout", this::logout);
+    public void registerRoutes(RoutesConfig config) {
+        config.get("/login", this::showLogin);
+        config.post("/login", this::doLogin);
+        config.get("/logout", this::logout);
     }
 
     private void showLogin(Context ctx) {

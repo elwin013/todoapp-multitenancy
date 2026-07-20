@@ -1,6 +1,7 @@
 package net.codeer.app.common;
 
 import io.javalin.Javalin;
+import io.javalin.config.RoutesConfig;
 import io.javalin.http.Context;
 
 import java.util.HashMap;
@@ -19,12 +20,12 @@ public class TodoController {
         this.todoDaoProvider = todoDaoProvider;
     }
 
-    public void registerRoutes(Javalin app) {
-        app.get("/", this::listTodos);
-        app.post("/", this::createTodo);
-        app.get("/{id}/delete", this::deleteTodo);
-        app.get("/{id}/done", this::markAsDone);
-        app.get("/{id}/undone", this::markAsNotDone);
+    public void registerRoutes(RoutesConfig config) {
+        config.get("/", this::listTodos);
+        config.post("/", this::createTodo);
+        config.get("/{id}/delete", this::deleteTodo);
+        config.get("/{id}/done", this::markAsDone);
+        config.get("/{id}/undone", this::markAsNotDone);
     }
 
     private void listTodos(Context ctx) {
